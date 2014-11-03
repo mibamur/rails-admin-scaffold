@@ -91,10 +91,10 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
     end
 
     def set_page_title
-      drop_page_title("戒毒者管理", "维护戒毒人员记录")
+      drop_page_title("#{I18n.t('activerecord.models.<%= singular_table_name %>')}管理", "维护#{I18n.t('activerecord.models.<%= singular_table_name %>')}记录")
     end
     def drop_<%= singular_table_name %>_breadcrumb
-      drop_breadcrumb("戒毒者管理", admin_gowsters_path)
+      drop_breadcrumb("#{I18n.t('activerecord.models.<%= singular_table_name %>')}管理", <%= prefixed_index_helper %>_path)
     end
 end
 <% end -%>
