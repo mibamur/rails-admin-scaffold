@@ -1,18 +1,4 @@
-<%%= form_for(<%= "[:#{prefix}, @#{singular_table_name}]" %>, html: { class: 'form-horizontal <%= singular_table_name %>' }) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation" class="panel panel-danger">
-      <div class="panel-heading">
-        <h2 class="panel-title"><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-          <li><%%= msg %></li>
-        <%% end %>
-        </ul>
-      </div>
-    </div>
-  <%% end %>
+<%%= simple_form_for(<%= "[:#{prefix}, @#{singular_table_name}]" %>, html: { class: 'form-horizontal <%= singular_table_name %>' }) do |f| %>
 
 <% attributes.each do |attribute| -%>
   <div class="form-group">

@@ -1,5 +1,3 @@
-%p#notice= notice
-
 <% for attribute in attributes -%>
 %dl.dl-horizontal
   %dt
@@ -7,5 +5,5 @@
   %dd= @<%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
 
-= link_to 'Edit', edit_<%= prefixed_plain_model_url %>_path(@<%= singular_table_name %>), class: 'btn btn-default'
-= link_to 'Back', <%= prefixed_index_helper %>_path, class: 'btn btn-default'
+= link_to 'Редактировать', edit_<%= prefixed_plain_model_url %>_path(@<%= singular_table_name %>), class: 'btn btn-default'
+= link_to 'Назад', <%= prefixed_index_helper %>_path, class: 'btn btn-default'
