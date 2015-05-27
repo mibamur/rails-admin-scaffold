@@ -1,4 +1,4 @@
-= simple_form_for(<%= "[:#{prefix}, @#{singular_table_name}], html: { class: 'form-horizontal  #{singular_table_name}'} " %>) do |f|
+= simple_form_for(<%= "[:#{prefix}, @#{singular_table_name}], html: { class: '#{singular_table_name}'} " %>) do |f|
 
   .form-inputs
   <%- attributes.each do |attribute| -%>
