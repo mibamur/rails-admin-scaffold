@@ -1,9 +1,9 @@
 = simple_form_for(<%= "[:#{prefix}, @#{singular_table_name}], html: { class: 'form-horizontal  #{singular_table_name}'} " %>) do |f|
 
   .form-inputs
-    <%- attributes.each do |attribute| -%>
-      = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
-    <%- end -%>
+  <%- attributes.each do |attribute| -%>
+    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+  <%- end -%>
 
   .form-actions
     = f.button :submit, 'Сохранить'
