@@ -1,31 +1,22 @@
-<h1>Listing <%= plural_table_name %></h1>
-
-<table>
-  <thead>
+<div class="box-body">
+<table class="table table-bordered table-striped">
+  <tbody>
     <tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-      <th><%= attribute.human_name %></th>
+      <th><%%= t('<%= "activerecord.attributes.#{singular_table_name}.#{attribute.name}" %>') %></th>
 <% end -%>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
-  </thead>
-
-  <tbody>
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
       <tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
         <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
-        <td><%%= link_to 'Show', <%= "[:#{prefix}, #{singular_table_name}]" %> %></td>
-        <td><%%= link_to 'Edit', edit_<%= prefixed_plain_model_url %>_path(<%= singular_table_name %>) %></td>
-        <td><%%= link_to 'Destroy', <%= "[:#{prefix}, #{singular_table_name}]" %>, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%%= link_to t('model.action.show'), <%= "[:#{prefix}, #{singular_table_name}]" %> %>
+        <%%= link_to t('model.action.edit'), edit_<%= prefixed_plain_model_url %>_path(<%= singular_table_name %>) %>
+        <%%= link_to t('model.action.destroy'), <%= "[:#{prefix}, #{singular_table_name}]" %>, method: :delete, data: { confirm: t('model.action.confirm_destroy') } %></td>
       </tr>
     <%% end %>
   </tbody>
 </table>
-
-<br>
-
-<%%= link_to 'New <%= human_name %>', new_<%= prefixed_plain_model_url %>_path %>
+</div>

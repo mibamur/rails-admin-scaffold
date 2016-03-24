@@ -1,0 +1,7 @@
+"zh-CN":
+  model:
+    action:
+      show: 查看
+      edit: 编辑
+      destroy: 删除
+      confirm_destroy: 确认删除？

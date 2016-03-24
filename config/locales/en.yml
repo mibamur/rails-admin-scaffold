@@ -1,0 +1,7 @@
+en:
+  model:
+    action:
+      show: Show
+      edit: Edit
+      destroy: Destroy
+      confirm_destroy: Confirm for destroy?

@@ -6,24 +6,31 @@ require_dependency "<%= namespaced_file_path %>/application_controller"
 class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_class_name %>Controller
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_page_title
+  before_action :drop_<%= singular_table_name %>_breadcrumb, only: [:new, :show, :edit]
+
   # GET <%= prefixed_route_url %>
   # GET <%= prefixed_route_url %>.json
   def index
     @<%= plural_table_name %> = <%= orm_class.all(class_name) %>
+    drop_breadcrumb("#{I18n.t('activerecord.models.<%= singular_table_name %>')}管理")
   end
 
   # GET <%= prefixed_route_url %>/1
   # GET <%= prefixed_route_url %>/1.json
   def show
+    drop_breadcrumb("查看#{I18n.t('activerecord.models.<%= singular_table_name %>')}")
   end
 
   # GET <%= prefixed_route_url %>/new
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
+    drop_breadcrumb("新建#{I18n.t('activerecord.models.<%= singular_table_name %>')}")
   end
 
   # GET <%= prefixed_route_url %>/1/edit
   def edit
+    drop_breadcrumb("编辑#{I18n.t('activerecord.models.<%= singular_table_name %>')}")
   end
 
   # POST <%= prefixed_route_url %>
@@ -36,6 +43,7 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
         format.html { redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} успешно создан(о).'" %> }
         format.json { render action: 'show', status: :created, location: <%= "@#{singular_table_name}" %> }
       else
+        drop_breadcrumb("新建#{I18n.t('activerecord.models.<%= singular_table_name %>')}")
         format.html { render action: 'new' }
         format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
       end
@@ -50,6 +58,7 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
         format.html { redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} успешно обновлен(о).'" %> }
         format.json { head :no_content }
       else
+        drop_breadcrumb("编辑#{I18n.t('activerecord.models.<%= singular_table_name %>')}")
         format.html { render action: 'edit' }
         format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
       end
@@ -79,6 +88,13 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
       <%- else -%>
       params.require(<%= ":#{singular_table_name}" %>).permit(<%= attributes_names.map { |name| ":#{name}" }.join(', ') %>)
       <%- end -%>
+    end
+
+    def set_page_title
+      drop_page_title("#{I18n.t('activerecord.models.<%= singular_table_name %>')}管理", "维护#{I18n.t('activerecord.models.<%= singular_table_name %>')}记录")
+    end
+    def drop_<%= singular_table_name %>_breadcrumb
+      drop_breadcrumb("#{I18n.t('activerecord.models.<%= singular_table_name %>')}管理", <%= prefixed_index_helper %>_path)
     end
 end
 <% end -%>
