@@ -29,7 +29,7 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
 
     if @<%= orm_instance.save %>
-      redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} was successfully created.'" %>
+      redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} успешно создан(о).'" %>
     else
       render action: 'new'
     end
@@ -38,7 +38,7 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
   # PATCH/PUT <%= prefixed_route_url %>/1
   def update
     if @<%= orm_instance.update("#{singular_table_name}_params") %>
-      redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} was successfully updated.'" %>
+      redirect_to <%= "[:#{prefix}, @#{singular_table_name}]" %>, notice: <%= "'#{human_name} успешно обновлен(о).'" %>
     else
       render action: 'edit'
     end
@@ -47,7 +47,7 @@ class <%= prefixed_controller_class_name %>Controller < <%= parent_controller_cl
   # DELETE <%= prefixed_route_url %>/1
   def destroy
     @<%= orm_instance.destroy %>
-    redirect_to <%= prefixed_index_helper %>_url, notice: <%= "'#{human_name} was successfully destroyed.'" %>
+    redirect_to <%= prefixed_index_helper %>_url, notice: <%= "'#{human_name} успешно удален(о).'" %>
   end
 
   private

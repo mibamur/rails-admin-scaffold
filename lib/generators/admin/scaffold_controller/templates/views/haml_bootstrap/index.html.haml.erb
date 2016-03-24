@@ -1,5 +1,6 @@
-.page-header
-  %h1 Listing <%= plural_table_name %>
+%h1 <%= plural_table_name %>
+
+= link_to 'Создать <%= human_name %>', new_<%= prefixed_plain_model_url %>_path, class: 'btn btn-primary'
 
 %table.table.table-stripped
   %tr
@@ -15,10 +16,7 @@
 <% for attribute in attributes -%>
       %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-      %td= link_to 'Show', <%= "[:#{prefix}, #{singular_table_name}]" %>, class: 'btn btn-default btn-xs'
-      %td= link_to 'Edit', edit_<%= prefixed_plain_model_url %>_path(<%= singular_table_name %>), class: 'btn btn-default btn-xs'
-      %td= link_to 'Destroy', <%= "[:#{prefix}, #{singular_table_name}]" %>, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs'
+      %td= link_to 'Редактировать', edit_<%= prefixed_plain_model_url %>_path(<%= singular_table_name %>), class: 'btn btn-default btn-xs'
+      %td= link_to 'Удалить', <%= "[:#{prefix}, #{singular_table_name}]" %>, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger btn-xs'
 
-%br
 
-= link_to 'New <%= human_name %>', new_<%= prefixed_plain_model_url %>_path, class: 'btn btn-primary'
